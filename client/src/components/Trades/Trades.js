@@ -6,7 +6,7 @@ import useStyles from "./styles";
 
 import { useSelector } from "react-redux";
 
-const Trades = () => {
+const Trades = ({ setCurrentId }) => {
   const trades = useSelector((state) => state.trades);
   const classes = useStyles();
   console.log(trades);
@@ -21,7 +21,7 @@ const Trades = () => {
     >
       {trades.map((trade) => (
         <Grid key={trade._id} item xs={12} sm={6}>
-          <Trade trade={trade} />
+          <Trade trade={trade} setCurrentId={setCurrentId} />
         </Grid>
       ))}
     </Grid>

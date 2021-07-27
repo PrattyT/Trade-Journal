@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useStyles from "./styles";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { createTrade } from "../../actions/trades";
+import { useDispatch, useSelector } from "react-redux";
+import { createTrade, updateTrade } from "../../actions/trades";
 
-const Form = () => {
+const Form = ({ currentId, setCurrentId }) => {
   var today = new Date();
   var dd = String(today.getDate()).padStart(2, "0");
   var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
@@ -27,11 +27,38 @@ const Form = () => {
     tags: "",
   });
 
+  const trade = useSelector((state) =>
+    currentId ? state.trades.find((p) => p._id === currentId) : null
+  );
+
+  useEffect(() => {
+    if (trade) setTradeData(trade);
+  }, [trade]);
+
+  console.log(currentId);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(createTrade(tradeData));
+    console.log(tradeData);
+    if (currentId) {
+      dispatch(updateTrade(currentId, tradeData));
+    } else dispatch(createTrade(tradeData));
+    clear();
   };
-  const clear = () => {};
+  const clear = () => {
+    setCurrentId(null);
+    setTradeData({
+      creator: "",
+      status: "OPEN",
+      symbol: "XYZ",
+      entryDate: date,
+      entryPrice: "0.00",
+      exitPrice: "0.00",
+      exitDate: date,
+      notes: "",
+      quantity: "0",
+      tags: "",
+    });
+  };
 
   return (
     <Paper className={classes.paper}>
@@ -41,7 +68,9 @@ const Form = () => {
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">New Trade</Typography>
+        <Typography variant="h6">
+          {currentId ? "Editing" : "New"} Trade
+        </Typography>
         <TextField
           name="creator"
           variant="outlined"

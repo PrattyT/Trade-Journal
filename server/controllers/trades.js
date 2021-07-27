@@ -1,4 +1,5 @@
 import TradeEntry from "../models/tradeEntry.js";
+import mongoose from "mongoose";
 
 export const getTrades = async (req, res) => {
   try {
@@ -29,9 +30,13 @@ export const updateTrade = async (req, res) => {
   if (!mongoose.Types.ObjectId.isValid(_id))
     return res.status(404).send("No post with that Id");
 
-  const updatedTrade = await TradeEntry.findByIdAndUpdate(_id, trade, {
-    new: true,
-  });
+  const updatedTrade = await TradeEntry.findByIdAndUpdate(
+    _id,
+    { ...trade, _id },
+    {
+      new: true,
+    }
+  );
 
   res.json(updatedTrade);
 };

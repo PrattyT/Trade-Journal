@@ -13,7 +13,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 
-const Trade = ({ trade }) => {
+const Trade = ({ trade, setCurrentId }) => {
   const classes = useStyles();
   return (
     <Card className={classes.card}>
@@ -25,7 +25,11 @@ const Trade = ({ trade }) => {
         </Typography>
       </div>
       <div className={classes.overlay2}>
-        <Button sytle={{ color: "white" }} size="small" onClick={() => {}}>
+        <Button
+          sytle={{ color: "white" }}
+          size="small"
+          onClick={() => setCurrentId(trade._id)}
+        >
           <MoreHorizIcon fontSize="default" />
         </Button>
       </div>
@@ -34,14 +38,17 @@ const Trade = ({ trade }) => {
           {trade.tags.map((tag) => `#${tag} `)}
         </Typography>
       </div>
+      <Typography className={classes.title} variant="h5" gutterBottom>
+        Symbol: {trade.symbol}
+      </Typography>
       <CardContent>
-        <Typography className={classes.title} variant="h5" gutterBottom>
-          {trade.entryPrice}
+        <Typography variant="h5" gutterBottom>
+          Entry Price: {trade.entryPrice}
         </Typography>
       </CardContent>
       <CardContent>
-        <Typography className={classes.title} variant="h5" gutterBottom>
-          {trade.notes}
+        <Typography variant="h5" gutterBottom>
+          Notes: {trade.notes}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>

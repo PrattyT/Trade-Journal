@@ -20,3 +20,13 @@ export const createTrade = (trade) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const updateTrade = (id, trade) => async (dispatch) => {
+  console.log(trade);
+  try {
+    const { data } = await api.updateTrade(id, trade);
+    dispatch({ type: "UPDATE", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
