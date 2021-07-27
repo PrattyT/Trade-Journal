@@ -30,7 +30,7 @@ const Trade = ({ trade, setCurrentId }) => {
       </div>
       <div className={classes.overlay2}>
         <Button
-          sytle={{ color: "white" }}
+          style={{ color: "white" }}
           size="small"
           onClick={() => setCurrentId(trade._id)}
         >
@@ -44,6 +44,10 @@ const Trade = ({ trade, setCurrentId }) => {
       </div>
       <Typography className={classes.title} variant="h5" gutterBottom>
         Symbol: {trade.symbol}
+      </Typography>
+
+      <Typography className={classes.title} variant="subtitle1" gutterBottom>
+        ({trade.status})
       </Typography>
       <CardContent>
         <Typography variant="body1" gutterBottom>

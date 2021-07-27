@@ -39,11 +39,13 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(tradeData);
+    
     if (currentId) {
       dispatch(updateTrade(currentId, tradeData));
     } else dispatch(createTrade(tradeData));
     clear();
   };
+
   const clear = () => {
     setCurrentId(null);
     setTradeData({
