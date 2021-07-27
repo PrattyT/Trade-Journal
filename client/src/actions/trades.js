@@ -30,3 +30,15 @@ export const updateTrade = (id, trade) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const deleteTrade = (id) => async (dispatch) => {
+  console.log("deleting action");
+  console.log(id);
+
+  try {
+    await api.deleteTrade(id);
+    dispatch({ type: "DELETE", payload: id });
+  } catch (error) {
+    console.log(error);
+  }
+};

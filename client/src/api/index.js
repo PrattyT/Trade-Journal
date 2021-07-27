@@ -8,3 +8,5 @@ export const createTrade = (newTrade) => axios.post(url, newTrade);
 
 export const updateTrade = (id, updatedTrade) =>
   axios.patch(`${url}/${id}`, updatedTrade);
+
+export const deleteTrade = (id) => axios.delete(`${url}/${id}`);

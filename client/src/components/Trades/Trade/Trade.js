@@ -13,8 +13,12 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 
+import { useDispatch } from "react-redux";
+import { deleteTrade } from "../../../actions/trades";
+
 const Trade = ({ trade, setCurrentId }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} title={trade.symbol} />
@@ -57,7 +61,11 @@ const Trade = ({ trade, setCurrentId }) => {
           Like
           {trade.likeCount}
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(deleteTrade(trade._id))}
+        >
           <DeleteIcon fontSize="small" />
           Delete
         </Button>
