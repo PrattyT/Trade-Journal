@@ -21,3 +21,17 @@ export const createTrade = async (req, res) => {
     res.status(409).json({ message: error.message });
   }
 };
+
+export const updateTrade = async (req, res) => {
+  const { id: _id } = req.params;
+  const trade = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(_id))
+    return res.status(404).send("No post with that Id");
+
+  const updatedTrade = await TradeEntry.findByIdAndUpdate(_id, trade, {
+    new: true,
+  });
+
+  res.json(updatedTrade);
+};
