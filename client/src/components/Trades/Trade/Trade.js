@@ -71,7 +71,7 @@ const Trade = ({ trade, setCurrentId }) => {
           onClick={() => dispatch(likeTrade(trade._id))}
         >
           <ThumbUpAltIcon fontSize="small" />
-          Like
+          Like &nbsp;
           {trade.likeCount}
         </Button>
         <Button

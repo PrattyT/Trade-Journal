@@ -39,7 +39,7 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(tradeData);
-    
+
     if (currentId) {
       dispatch(updateTrade(currentId, tradeData));
     } else dispatch(createTrade(tradeData));
@@ -117,7 +117,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="notes"
           variant="outlined"
-          label="notes"
+          label="Notes"
           fullWidth
           value={tradeData.notes}
           onChange={(e) =>
@@ -127,7 +127,7 @@ const Form = ({ currentId, setCurrentId }) => {
         <TextField
           name="tags"
           variant="outlined"
-          label="tags"
+          label="Tags (separated by comma)"
           fullWidth
           value={tradeData.tags}
           onChange={(e) =>
