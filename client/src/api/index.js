@@ -10,3 +10,6 @@ export const updateTrade = (id, updatedTrade) =>
   axios.patch(`${url}/${id}`, updatedTrade);
 
 export const deleteTrade = (id) => axios.delete(`${url}/${id}`);
+
+export const likeTrade = (id) => axios.patch(`${url}/${id}/likeTrade`);
+

@@ -49,5 +49,20 @@ export const deleteTrade = async (req, res) => {
 
   await TradeEntry.findByIdAndRemove(id);
 
-  res.json({ message: "Post deleted successfully" }); 
+  res.json({ message: "Post deleted successfully" });
+};
+
+export const likeTrade = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No post with that Id");
+
+  const trade = await TradeEntry.findById(id);
+  const updatedTrade = await TradeEntry.findByIdAndUpdate(
+    id,
+    { likeCount: trade.likeCount + 1 },
+    { new: true }
+  );
+
+  res.json(updatedTrade);
 };

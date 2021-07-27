@@ -42,3 +42,14 @@ export const deleteTrade = (id) => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const likeTrade = (id) => async (dispatch) => {
+  console.log("liking action");
+  console.log(id);
+  try {
+    const { data } = await api.likeTrade(id);
+    dispatch({ type: "UPDATE", payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};

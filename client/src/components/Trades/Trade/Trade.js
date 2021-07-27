@@ -14,7 +14,7 @@ import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 
 import { useDispatch } from "react-redux";
-import { deleteTrade } from "../../../actions/trades";
+import { deleteTrade, likeTrade } from "../../../actions/trades";
 
 const Trade = ({ trade, setCurrentId }) => {
   const classes = useStyles();
@@ -46,17 +46,26 @@ const Trade = ({ trade, setCurrentId }) => {
         Symbol: {trade.symbol}
       </Typography>
       <CardContent>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="body1" gutterBottom>
           Entry Price: {trade.entryPrice}
         </Typography>
       </CardContent>
       <CardContent>
-        <Typography variant="h5" gutterBottom>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          component="p"
+          gutterBottom
+        >
           Notes: {trade.notes}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(likeTrade(trade._id))}
+        >
           <ThumbUpAltIcon fontSize="small" />
           Like
           {trade.likeCount}
