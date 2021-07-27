@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 
 const tradeSchema = mongoose.Schema({
+  creator: String,
   symbol: String,
+  status: String,
   entryDate: Date,
   entryPrice: String,
   exitPrice: String,

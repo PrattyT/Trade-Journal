@@ -5,11 +5,12 @@ import tradeRoutes from "./routes/trades.js";
 
 const app = express();
 
-app.use("/trades", tradeRoutes);
+
 
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+app.use("/trades", tradeRoutes);
 
 const CONNECTION_URL =
   "mongodb+srv://pratty:pratty@cluster0.bplqq.mongodb.net/Tradel?retryWrites=true&w=majority";

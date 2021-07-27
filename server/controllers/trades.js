@@ -3,6 +3,7 @@ import TradeEntry from "../models/tradeEntry.js";
 export const getTrades = async (req, res) => {
   try {
     const tradeEntries = await TradeEntry.find();
+    console.log(tradeEntries);
     res.status(200).json(tradeEntries);
   } catch (error) {
     res.status(404).json({ message: error.message });
