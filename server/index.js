@@ -12,6 +12,10 @@ app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use("/trades", tradeRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Tradel API");
+});
+
 const PORT = process.env.PORT || 5000;
 
 mongoose

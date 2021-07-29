@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const url = "http://localhost:5000/trades";
+const url = "https://tradel.herokuapp.com/trades";
 
 export const fetchTrades = () => axios.get(url);
 
