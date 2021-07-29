@@ -19,8 +19,8 @@ const Form = ({ currentId, setCurrentId }) => {
     status: "OPEN",
     symbol: "XYZ",
     entryDate: date,
-    entryPrice: "0.00",
-    exitPrice: "0.00",
+    entryPrice: "0",
+    exitPrice: "0",
     exitDate: date,
     notes: "",
     quantity: "0",
@@ -39,6 +39,11 @@ const Form = ({ currentId, setCurrentId }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(tradeData);
+
+    // close the trade if needed
+    // if(tradeData.exitPrice !== "0.00" && tradeData.status === "OPEN"){
+    //   dispatch(closeTrade(currentId))
+    // }
 
     if (currentId) {
       dispatch(updateTrade(currentId, tradeData));
@@ -101,6 +106,16 @@ const Form = ({ currentId, setCurrentId }) => {
           value={tradeData.entryPrice}
           onChange={(e) =>
             setTradeData({ ...tradeData, entryPrice: e.target.value })
+          }
+        />
+        <TextField
+          name="exitPrice"
+          variant="outlined"
+          label="Exit Price"
+          fullWidth
+          value={tradeData.exitPrice}
+          onChange={(e) =>
+            setTradeData({ ...tradeData, exitPrice: e.target.value })
           }
         />
         <TextField

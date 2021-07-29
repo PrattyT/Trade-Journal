@@ -14,6 +14,10 @@ export const getTrades = () => async (dispatch) => {
 
 export const createTrade = (trade) => async (dispatch) => {
   try {
+    if (trade.exitPrice !== "0") {
+      trade.status = "CLOSED";
+      console.log("closing trade created");
+    }
     const { data } = await api.createTrade(trade);
     dispatch({ type: CREATE, payload: data });
   } catch (error) {
@@ -24,6 +28,12 @@ export const createTrade = (trade) => async (dispatch) => {
 export const updateTrade = (id, trade) => async (dispatch) => {
   console.log(trade);
   try {
+    if (trade.exitPrice !== "0") {
+      trade.status = "CLOSED";
+      console.log("close trade");
+    } else {
+      trade.status = "OPEN";
+    }
     const { data } = await api.updateTrade(id, trade);
     dispatch({ type: UPDATE, payload: data });
   } catch (error) {

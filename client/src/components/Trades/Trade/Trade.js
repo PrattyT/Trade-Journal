@@ -53,6 +53,9 @@ const Trade = ({ trade, setCurrentId }) => {
         <Typography variant="body1" gutterBottom>
           Entry Price: {trade.entryPrice}
         </Typography>
+        <Typography variant="body1" gutterBottom>
+          Exit Price: {trade.exitPrice}
+        </Typography>
       </CardContent>
       <CardContent>
         <Typography
