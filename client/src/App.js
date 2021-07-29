@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Container, AppBar, Typography, Grow, Grid } from "@material-ui/core";
-import trades from "./images/logo.png";
+import { Container, Grow, Grid } from "@material-ui/core";
 import Form from "./components/Form/Form";
 import Trades from "./components/Trades/Trades";
 import useStyles from "./styles";
 import { useDispatch } from "react-redux";
 import { getTrades } from "./actions/trades";
+import Navbar from "./components/Navbar/Navbar";
 
 const App = () => {
   const [currentId, setCurrentId] = useState(null);
@@ -20,12 +20,13 @@ const App = () => {
 
   return (
     <Container maxwidth="lg">
-      <AppBar className={classes.appBar} position="static" color="inherit">
+      <Navbar />
+      {/* <AppBar className={classes.appBar} position="static" color="inherit">
         <Typography className={classes.heading} variant="h2" align="center">
           Trade Journal
         </Typography>
         <img className={classes.image} src={trades} alt="trades" height="60" />
-      </AppBar>
+      </AppBar> */}
       <Grow in>
         <Container>
           <Grid
