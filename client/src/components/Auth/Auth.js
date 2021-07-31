@@ -7,15 +7,21 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
+import { GoogleLogin } from "react-google-login";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Icon from "./icon";
 
 import useStyles from "./styles";
 import Input from "./Input";
 
 const Auth = () => {
-  const [showPassword, setShowPassword] = useState(false);
   const classes = useStyles();
 
+  // State
+  const [showPassword, setShowPassword] = useState(false);
+  const [isSignup, setIsSignup] = useState(false);
+
+  // Handlers
   const handleSubmit = () => {};
 
   const handleChange = () => {};
@@ -28,7 +34,15 @@ const Auth = () => {
   const handleShowPassword = () =>
     setShowPassword((prevShowPassword) => !prevShowPassword);
 
-  const [isSignup, setIsSignup] = useState(false);
+  // Google helpers
+  const googleSuccess = async (res) => {
+    console.log(res);
+  };
+
+  const googleFailure = () => {
+    console.log("Google Sign in Failed");
+  };
+
   return (
     <Container component="main" maxwidth="xs">
       <Paper className={classes.paper} elevation={3}>
@@ -88,7 +102,26 @@ const Auth = () => {
           >
             {isSignup ? "Sign up" : "Sign in"}
           </Button>
-          <Grid container justify="flex-end">
+          <GoogleLogin
+            clientId="887268619731-u0calkg3apo9dmnb16a8umgh5e92as22.apps.googleusercontent.com"
+            render={(renderProps) => (
+              <Button
+                className={classes.googleButton}
+                color="primary"
+                fullWidth
+                onClick={renderProps.onClick}
+                disabled={renderProps.disabled}
+                startIcon={<Icon />}
+                variant="contained"
+              >
+                Sign In With Google
+              </Button>
+            )}
+            onSuccess={googleSuccess}
+            onFailure={googleFailure}
+            cookiePolicy="single_host_origin"
+          />
+          <Grid container justifyContent="flex-end">
             <Grid item>
               <Button onClick={switchMode}>
                 {isSignup
