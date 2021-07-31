@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import tradeRoutes from "./routes/trades.js";
+import userRoutes from "./routes/users.js";
 import dotenv from "dotenv";
 
 const app = express();
@@ -10,7 +11,10 @@ dotenv.config();
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
+
+//routes
 app.use("/trades", tradeRoutes);
+app.use("/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("Tradel API");
