@@ -7,15 +7,25 @@ import {
   Typography,
   Container,
 } from "@material-ui/core";
-import {useHistory} from "react-router-dom"
+import { useHistory } from "react-router-dom";
 import { GoogleLogin } from "react-google-login";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Icon from "./icon";
 import { useDispatch } from "react-redux";
 import useStyles from "./styles";
 import Input from "./Input";
+import { signin, signup } from "../../actions/auth";
+
+const initialState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+};
 
 const Auth = () => {
+  // React
   const classes = useStyles();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -23,11 +33,21 @@ const Auth = () => {
   // State
   const [showPassword, setShowPassword] = useState(false);
   const [isSignup, setIsSignup] = useState(false);
+  const [formData, setFormData] = useState(initialState);
 
-  // Handlers
-  const handleSubmit = () => {};
+  // Helpers
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (isSignup) {
+      dispatch(signup(formData, history));
+    } else {
+      dispatch(signin(formData, history));
+    }
+  };
 
-  const handleChange = () => {};
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const switchMode = () => {
     setIsSignup((previsSignUp) => !previsSignUp);

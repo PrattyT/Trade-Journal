@@ -6,7 +6,6 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LOGOUT } from "../../constants/actionTypes";
 
-
 const Navbar = () => {
   // react
   const dispatch = useDispatch();
@@ -19,7 +18,7 @@ const Navbar = () => {
 
   // helpers
   useEffect(() => {
-    const token = user?.token;
+    // const token = user?.token;
     setUser(JSON.parse(localStorage.getItem("profile")));
   }, [location]);
 
