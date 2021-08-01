@@ -3,6 +3,15 @@ import jwt from "jsonwebtoken";
 import User from "../models/user.js";
 import mongoose from "mongoose";
 
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+};
+
 export const signin = async (req, res) => {
   const { email, password } = req.body;
 
