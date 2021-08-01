@@ -7,3 +7,5 @@ Using the MERN stack (MongoDB, Express, React, and Node) to create a social medi
 Working link: https://tradel.netlify.app/
 
 ![alt text](https://github.com/PrattyT/Trade-Journal/blob/main/client/src/images/homepage.png?raw=true)
+
+![alt text](![image](https://user-images.githubusercontent.com/67240347/127785710-994dd569-62d3-4981-9dbe-56e90e646e91.png))
