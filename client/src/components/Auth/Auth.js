@@ -51,11 +51,10 @@ const Auth = () => {
 
   const switchMode = () => {
     setIsSignup((previsSignUp) => !previsSignUp);
-    handleShowPassword(false);
+    setShowPassword(false);
   };
 
-  const handleShowPassword = () =>
-    setShowPassword((prevShowPassword) => !prevShowPassword);
+  const handleShowPassword = () => setShowPassword(!showPassword);
 
   // Google helpers
   const googleSuccess = async (res) => {
@@ -111,7 +110,7 @@ const Auth = () => {
               name="password"
               label="Password"
               handleChange={handleChange}
-              type={showPassword ? "text" : "showPassword"}
+              type={showPassword ? "text" : "password"}
               handleShowPassword={handleShowPassword}
             />
             {isSignup && (

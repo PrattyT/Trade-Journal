@@ -23,7 +23,7 @@ const Trade = ({ trade, setCurrentId }) => {
     <Card className={classes.card}>
       <CardMedia className={classes.media} title={trade.symbol} />
       <div className={classes.overlay}>
-        <Typography variant="h6">{trade.creator}</Typography>
+        <Typography variant="h6">{trade.name}</Typography>
         <Typography variant="body2">
           {moment(trade.createdAt).fromNow()}
         </Typography>
@@ -34,7 +34,7 @@ const Trade = ({ trade, setCurrentId }) => {
           size="small"
           onClick={() => setCurrentId(trade._id)}
         >
-          <MoreHorizIcon fontSize="default" />
+          <MoreHorizIcon fontSize="medium" />
         </Button>
       </div>
       <div className={classes.details}>
@@ -75,7 +75,7 @@ const Trade = ({ trade, setCurrentId }) => {
         >
           <ThumbUpAltIcon fontSize="small" />
           Like &nbsp;
-          {trade.likeCount}
+          {trade.likes.size}
         </Button>
         <Button
           size="small"

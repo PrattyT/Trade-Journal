@@ -11,11 +11,11 @@ const Form = ({ currentId, setCurrentId }) => {
   var yyyy = today.getFullYear();
   var date = yyyy + "-" + mm + "-" + dd;
   const classes = useStyles();
-
+  const user = JSON.parse(localStorage.getItem("profile"));
+  console.log(user);
   const dispatch = useDispatch();
 
   const [tradeData, setTradeData] = useState({
-    creator: "",
     status: "OPEN",
     symbol: "XYZ",
     entryDate: date,
@@ -36,25 +36,32 @@ const Form = ({ currentId, setCurrentId }) => {
   }, [trade]);
 
   console.log(currentId);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(tradeData);
 
-    // close the trade if needed
-    // if(tradeData.exitPrice !== "0.00" && tradeData.status === "OPEN"){
-    //   dispatch(closeTrade(currentId))
-    // }
-
     if (currentId) {
-      dispatch(updateTrade(currentId, tradeData));
-    } else dispatch(createTrade(tradeData));
+      dispatch(
+        updateTrade(currentId, { ...tradeData, name: user?.result?.name })
+      );
+    } else dispatch(createTrade({ ...tradeData, name: user?.result?.name }));
     clear();
   };
+
+  if (!user?.result?.name) {
+    return (
+      <Paper className={classes.paper}>
+        <Typography variant="h6" align="center">
+          Sign in to Create Trades
+        </Typography>
+      </Paper>
+    );
+  }
 
   const clear = () => {
     setCurrentId(null);
     setTradeData({
-      creator: "",
       status: "OPEN",
       symbol: "XYZ",
       entryDate: date,
@@ -78,16 +85,6 @@ const Form = ({ currentId, setCurrentId }) => {
         <Typography variant="h6">
           {currentId ? "Editing" : "New"} Trade
         </Typography>
-        <TextField
-          name="creator"
-          variant="outlined"
-          label="Creator"
-          fullWidth
-          value={tradeData.creator}
-          onChange={(e) =>
-            setTradeData({ ...tradeData, creator: e.target.value })
-          }
-        />
         <TextField
           name="symbol"
           variant="outlined"

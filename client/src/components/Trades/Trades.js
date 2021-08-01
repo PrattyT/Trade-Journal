@@ -16,7 +16,7 @@ const Trades = ({ setCurrentId }) => {
     <Grid
       className={classes.contaier}
       container
-      alignItes="stretch"
+      alignItems="stretch"
       spacing={3}
     >
       {trades.map((trade) => (

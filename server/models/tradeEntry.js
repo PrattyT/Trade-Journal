@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const tradeSchema = mongoose.Schema({
   creator: String,
+  name: String,
   symbol: String,
   status: String,
   entryDate: String,
@@ -11,9 +12,9 @@ const tradeSchema = mongoose.Schema({
   notes: String,
   quantity: String,
   tags: [String],
-  likeCount: {
-    type: Number,
-    default: 0,
+  likes: {
+    type: [String],
+    default: [],
   },
   createdAt: {
     type: Date,

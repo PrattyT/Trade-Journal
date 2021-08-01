@@ -1,12 +1,19 @@
 import express from "express";
-import { getTrades, createTrade, updateTrade, deleteTrade, likeTrade } from "../controllers/trades.js";
+import {
+  getTrades,
+  createTrade,
+  updateTrade,
+  deleteTrade,
+  likeTrade,
+} from "../controllers/trades.js";
+import auth from "../middleware/auth.js";
 
 const router = express.Router();
 
 router.get("/", getTrades);
-router.post("/", createTrade);
-router.patch("/:id", updateTrade);
-router.delete("/:id", deleteTrade);
-router.patch("/:id/likeTrade", likeTrade)
+router.post("/", auth, createTrade);
+router.patch("/:id", auth, updateTrade);
+router.delete("/:id", auth, deleteTrade);
+router.patch("/:id/likeTrade", auth, likeTrade);
 
 export default router;

@@ -13,7 +13,7 @@ export const getTrades = async (req, res) => {
 
 export const createTrade = async (req, res) => {
   const body = req.body;
-  const trade = new TradeEntry(body);
+  const trade = new TradeEntry({ ...body, creator: req.userId, createdAt: new Date().toISOString() });
 
   try {
     await trade.save();
@@ -54,15 +54,25 @@ export const deleteTrade = async (req, res) => {
 
 export const likeTrade = async (req, res) => {
   const { id } = req.params;
+
+  if (!req.userId) return res.json({ message: "Unauthenticated" });
+
   if (!mongoose.Types.ObjectId.isValid(id))
     return res.status(404).send("No post with that Id");
 
   const trade = await TradeEntry.findById(id);
-  const updatedTrade = await TradeEntry.findByIdAndUpdate(
-    id,
-    { likeCount: trade.likeCount + 1 },
-    { new: true }
-  );
+
+  const index = trade.likes.findIndex((id) => id === String(req.userId));
+
+  if (index === -1) {
+    trade.likes.push(req.userId);
+  } else {
+    trade.likes = post.likes.filter((id) => id !== String(req.userId));
+  }
+
+  const updatedTrade = await TradeEntry.findByIdAndUpdate(id, trade, {
+    new: true,
+  });
 
   res.json(updatedTrade);
 };
