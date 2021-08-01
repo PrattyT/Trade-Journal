@@ -84,13 +84,12 @@ const Trade = ({ trade, setCurrentId }) => {
       </Typography>
 
       <Typography className={classes.title} variant="subtitle1" gutterBottom>
-        ({trade.status})
+        ({trade.status}) &nbsp; Quantity: {trade.quantity}
       </Typography>
       <CardContent>
         <Typography variant="body1" gutterBottom>
           Entry Price: {trade.entryPrice}
         </Typography>
-        
         <Typography variant="body1" gutterBottom>
           Exit Price: {trade.exitPrice}
         </Typography>
