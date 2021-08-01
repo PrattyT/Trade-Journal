@@ -101,6 +101,7 @@ const Form = ({ currentId, setCurrentId }) => {
           variant="outlined"
           label="Entry Price"
           fullWidth
+          required
           value={tradeData.entryPrice}
           onChange={(e) =>
             setTradeData({ ...tradeData, entryPrice: e.target.value })
@@ -121,6 +122,7 @@ const Form = ({ currentId, setCurrentId }) => {
           name="quantity"
           variant="outlined"
           label="Quantity"
+          required
           fullWidth
           value={tradeData.quantity}
           onChange={(e) =>
