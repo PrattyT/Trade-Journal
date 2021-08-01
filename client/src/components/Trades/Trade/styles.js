@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-export default makeStyles({
+export default makeStyles((theme)=>({
   media: {
     height: 0,
     paddingTop: "25.25%",
@@ -49,4 +49,12 @@ export default makeStyles({
     display: "flex",
     justifyContent: "space-between",
   },
-});
+  paper: {
+    position: "absolute",
+    width: 400,
+    backgroundColor: theme.palette.background.paper,
+    border: "2px solid #000",
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing(2, 4, 3),
+  },
+}));

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useStyles from "./styles";
 import {
   Card,
@@ -8,6 +8,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
+import Modal from "@material-ui/core/Modal";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
@@ -17,8 +18,38 @@ import { useDispatch } from "react-redux";
 import { deleteTrade, likeTrade } from "../../../actions/trades";
 
 const Trade = ({ trade, setCurrentId }) => {
+
+  function rand() {
+    return Math.round(Math.random() * 20) - 10;
+  }
+  
+  function getModalStyle() {
+    const top = 50 + rand();
+    const left = 50 + rand();
+
+    return {
+      top: `${top}%`,
+      left: `${left}%`,
+      transform: `translate(-${top}%, -${left}%)`,
+    };
+  }
+
+  const [modalStyle] = React.useState(getModalStyle);
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const [showChart, setShowChart] = useState(false);
+
+  const handleChart = () => {
+    setShowChart(!showChart);
+  };
+
+  const body = (
+    <div style={modalStyle} className={classes.paper}>
+      <h2 id="simple-modal-title">Title</h2>
+      <p id="simple-modal-description">CHART HERE</p>
+    </div>
+  );
 
   const user = JSON.parse(localStorage.getItem("profile"));
 
@@ -71,6 +102,17 @@ const Trade = ({ trade, setCurrentId }) => {
           >
             <MoreHorizIcon fontSize="medium" />
           </Button>
+          <Button style={{ color: "green" }} size="small" onClick={handleChart}>
+            Open chart
+          </Button>
+          <Modal
+            open={showChart}
+            onClose={handleChart}
+            aria-labelledby="Chart"
+            aria-describedby="simple-modal-description"
+          >
+            {body}
+          </Modal>
         </div>
       )}
 
@@ -101,9 +143,8 @@ const Trade = ({ trade, setCurrentId }) => {
             </Typography>
 
             <Typography variant="body1" gutterBottom>
-              Exit Date: {trade.exitDate === "" ? ("missing"): trade.exitDate}
+              Exit Date: {trade.exitDate === "" ? "missing" : trade.exitDate}
             </Typography>
-
           </>
         )}
       </CardContent>
