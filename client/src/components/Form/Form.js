@@ -116,6 +116,17 @@ const Form = ({ currentId, setCurrentId }) => {
           }
         />
         <TextField
+          type="quantity"
+          name="quantity"
+          variant="outlined"
+          label="Quantity"
+          fullWidth
+          value={tradeData.quantity}
+          onChange={(e) =>
+            setTradeData({ ...tradeData, quantity: e.target.value })
+          }
+        />
+        <TextField
           type="date"
           name="entryDate"
           variant="outlined"
