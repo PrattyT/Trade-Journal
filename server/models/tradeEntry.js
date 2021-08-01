@@ -8,7 +8,7 @@ const tradeSchema = mongoose.Schema({
   entryDate: String,
   entryPrice: String,
   exitPrice: String,
-  exitDate: Date,
+  exitDate: String,
   notes: String,
   quantity: String,
   tags: [String],
