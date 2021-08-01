@@ -127,6 +127,17 @@ const Form = ({ currentId, setCurrentId }) => {
           }
         />
         <TextField
+          type="date"
+          name="exitDate"
+          variant="outlined"
+          label="Exit Date"
+          fullWidth
+          value={tradeData.exitDate}
+          onChange={(e) =>
+            setTradeData({ ...tradeData, exitDate: e.target.value })
+          }
+        />
+        <TextField
           name="notes"
           variant="outlined"
           label="Notes"
