@@ -60,15 +60,20 @@ const Trade = ({ trade, setCurrentId }) => {
           {moment(trade.createdAt).fromNow()}
         </Typography>
       </div>
-      <div className={classes.overlay2}>
-        <Button
-          style={{ color: "white" }}
-          size="small"
-          onClick={() => setCurrentId(trade._id)}
-        >
-          <MoreHorizIcon fontSize="medium" />
-        </Button>
-      </div>
+
+      {(user?.result?.googleId === trade?.creator ||
+        user?.result?._id === trade.creator) && (
+        <div className={classes.overlay2}>
+          <Button
+            style={{ color: "white" }}
+            size="small"
+            onClick={() => setCurrentId(trade._id)}
+          >
+            <MoreHorizIcon fontSize="medium" />
+          </Button>
+        </div>
+      )}
+
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
           {trade.tags.map((tag) => `#${tag} `)}
@@ -108,14 +113,18 @@ const Trade = ({ trade, setCurrentId }) => {
         >
           <Likes />
         </Button>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => dispatch(deleteTrade(trade._id))}
-        >
-          <DeleteIcon fontSize="small" />
-          Delete
-        </Button>
+
+        {(user?.result?.googleId === trade?.creator ||
+          user?.result?._id === trade.creator) && (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => dispatch(deleteTrade(trade._id))}
+          >
+            <DeleteIcon fontSize="small" />
+            Delete
+          </Button>
+        )}
       </CardActions>
     </Card>
   );
