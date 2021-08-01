@@ -13,7 +13,11 @@ export const getTrades = async (req, res) => {
 
 export const createTrade = async (req, res) => {
   const body = req.body;
-  const trade = new TradeEntry({ ...body, creator: req.userId, createdAt: new Date().toISOString() });
+  const trade = new TradeEntry({
+    ...body,
+    creator: req.userId,
+    createdAt: new Date().toISOString(),
+  });
 
   try {
     await trade.save();
@@ -28,7 +32,7 @@ export const updateTrade = async (req, res) => {
   const trade = req.body;
 
   if (!mongoose.Types.ObjectId.isValid(_id))
-    return res.status(404).send("No post with that Id");
+    return res.status(404).send("No trade with that Id");
 
   const updatedTrade = await TradeEntry.findByIdAndUpdate(
     _id,
@@ -45,11 +49,11 @@ export const deleteTrade = async (req, res) => {
   const { id } = req.params;
 
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send("No post with that Id");
+    return res.status(404).send("No trade with that Id");
 
   await TradeEntry.findByIdAndRemove(id);
 
-  res.json({ message: "Post deleted successfully" });
+  res.json({ message: "Trade deleted successfully" });
 };
 
 export const likeTrade = async (req, res) => {
@@ -58,7 +62,7 @@ export const likeTrade = async (req, res) => {
   if (!req.userId) return res.json({ message: "Unauthenticated" });
 
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send("No post with that Id");
+    return res.status(404).send("No trade with that Id");
 
   const trade = await TradeEntry.findById(id);
 
@@ -67,7 +71,7 @@ export const likeTrade = async (req, res) => {
   if (index === -1) {
     trade.likes.push(req.userId);
   } else {
-    trade.likes = post.likes.filter((id) => id !== String(req.userId));
+    trade.likes = trade.likes.filter((id) => id !== String(req.userId));
   }
 
   const updatedTrade = await TradeEntry.findByIdAndUpdate(id, trade, {

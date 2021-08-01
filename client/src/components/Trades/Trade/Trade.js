@@ -12,13 +12,45 @@ import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
-
+import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import { useDispatch } from "react-redux";
 import { deleteTrade, likeTrade } from "../../../actions/trades";
 
 const Trade = ({ trade, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const Likes = () => {
+    if (trade.likes.length > 0) {
+      return trade.likes.find(
+        (like) => like === (user?.result?.googleId || user?.result?._id)
+      ) ? (
+        <>
+          <ThumbUpAltIcon fontSize="small" />
+          &nbsp;
+          {trade.likes.length > 2
+            ? `You and ${trade.likes.length - 1} others`
+            : `${trade.likes.length} like${trade.likes.length > 1 ? "s" : ""}`}
+        </>
+      ) : (
+        <>
+          <ThumbUpAltOutlined fontSize="small" />
+          &nbsp;{trade.likes.length}{" "}
+          {trade.likes.length === 1 ? "Like" : "Likes"}
+        </>
+      );
+    }
+
+    return (
+      <>
+        <ThumbUpAltOutlined fontSize="small" />
+        &nbsp; Like
+      </>
+    );
+  };
+
   return (
     <Card className={classes.card}>
       <CardMedia className={classes.media} title={trade.symbol} />
@@ -72,10 +104,9 @@ const Trade = ({ trade, setCurrentId }) => {
           size="small"
           color="primary"
           onClick={() => dispatch(likeTrade(trade._id))}
+          disabled={!user?.result}
         >
-          <ThumbUpAltIcon fontSize="small" />
-          Like &nbsp;
-          {trade.likes.size}
+          <Likes />
         </Button>
         <Button
           size="small"
