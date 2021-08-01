@@ -17,11 +17,11 @@ const Form = ({ currentId, setCurrentId }) => {
 
   const [tradeData, setTradeData] = useState({
     status: "OPEN",
-    symbol: "XYZ",
+    symbol: "",
     entryDate: date,
     entryPrice: "0",
-    exitPrice: "0",
-    exitDate: date,
+    exitPrice: "",
+    exitDate: "",
     notes: "",
     quantity: "0",
     tags: "",
@@ -63,11 +63,11 @@ const Form = ({ currentId, setCurrentId }) => {
     setCurrentId(null);
     setTradeData({
       status: "OPEN",
-      symbol: "XYZ",
+      symbol: "",
       entryDate: date,
       entryPrice: "0.00",
-      exitPrice: "0.00",
-      exitDate: date,
+      exitPrice: "",
+      exitDate: "",
       notes: "",
       quantity: "0",
       tags: "",
@@ -91,6 +91,7 @@ const Form = ({ currentId, setCurrentId }) => {
           label="Symbol"
           fullWidth
           value={tradeData.symbol}
+          required
           onChange={(e) =>
             setTradeData({ ...tradeData, symbol: e.target.value })
           }

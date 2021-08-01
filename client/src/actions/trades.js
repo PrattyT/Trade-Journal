@@ -14,7 +14,7 @@ export const getTrades = () => async (dispatch) => {
 
 export const createTrade = (trade) => async (dispatch) => {
   try {
-    if (trade.exitPrice !== "0") {
+    if (trade.exitPrice !== "") {
       trade.status = "CLOSED";
       console.log("closing trade created");
     } else {
@@ -30,7 +30,7 @@ export const createTrade = (trade) => async (dispatch) => {
 export const updateTrade = (id, trade) => async (dispatch) => {
   console.log(trade);
   try {
-    if (trade.exitPrice !== "0") {
+    if (trade.exitPrice !== "") {
       trade.status = "CLOSED";
       console.log("close trade");
     } else {

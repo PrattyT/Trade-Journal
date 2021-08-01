@@ -91,8 +91,21 @@ const Trade = ({ trade, setCurrentId }) => {
           Entry Price: {trade.entryPrice}
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Exit Price: {trade.exitPrice}
+          Entry Date: {trade.entryDate}
         </Typography>
+
+        {trade.status === "CLOSED" && (
+          <>
+            <Typography variant="body1" gutterBottom>
+              Exit Price: {trade.exitPrice}
+            </Typography>
+
+            <Typography variant="body1" gutterBottom>
+              Exit Date: {trade.exitDate === "" ? ("missing"): trade.exitDate}
+            </Typography>
+
+          </>
+        )}
       </CardContent>
       <CardContent>
         <Typography
