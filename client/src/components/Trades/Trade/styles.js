@@ -33,6 +33,12 @@ export default makeStyles((theme) => ({
     right: "20px",
     color: "white",
   },
+  overlay3: {
+    position: "absolute",
+    top: "50px",
+    right: "20px",
+    color: "white",
+  },
   grid: {
     display: "flex",
   },
@@ -51,7 +57,8 @@ export default makeStyles((theme) => ({
   },
   paper: {
     position: "absolute",
-    width: 400,
+    width: 1000,
+    heigt: 1000,
     backgroundColor: theme.palette.background.paper,
     border: "2px solid #000",
     boxShadow: theme.shadows[5],

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useStyles from "./styles";
+import TradingViewWidget from "react-tradingview-widget";
 import {
   Card,
   CardActions,
@@ -45,8 +46,10 @@ const Trade = ({ trade, setCurrentId }) => {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">{trade.symbol}</h2>
-      <p id="simple-modal-description">CHART HERE</p>
+      <h2 id="simple-modal-title">Chart</h2>
+      <p id="simple-modal-description">
+        {<TradingViewWidget symbol={trade.symbol} />}
+      </p>
     </div>
   );
 
@@ -101,26 +104,25 @@ const Trade = ({ trade, setCurrentId }) => {
           >
             <MoreHorizIcon fontSize="medium" />
           </Button>
-          <div>
-            <Button
-              style={{ color: "white" }}
-              size="small"
-              onClick={handleChart}
-              variant="outlined"
-            >
-              Open chart
-            </Button>
-            <Modal
-              open={showChart}
-              onClose={handleChart}
-              aria-labelledby="Chart"
-              aria-describedby="simple-modal-description"
-            >
-              {body}
-            </Modal>
-          </div>
         </div>
       )}
+
+      <div className={classes.overlay3}>
+        <Button
+          style={{ color: "black" }}
+          size="small"
+          onClick={handleChart}
+          variant="outlined"
+        >
+          Open chart
+        </Button>
+      </div>
+
+      <div className={classes.overlay2}>
+        <Modal open={showChart} onClose={handleChart}>
+          {body}
+        </Modal>
+      </div>
 
       <div className={classes.details}>
         <Typography variant="body2" color="textSecondary">
