@@ -47,9 +47,8 @@ const Trade = ({ trade, setCurrentId }) => {
   const body = (
     <div style={modalStyle} className={classes.paper}>
       <h2 id="simple-modal-title">Chart</h2>
-      <p id="simple-modal-description">
-        {<TradingViewWidget symbol={trade.symbol} />}
-      </p>
+      <p id="simple-modal-description"></p>
+      <TradingViewWidget symbol={trade.symbol} />
     </div>
   );
 
@@ -118,7 +117,7 @@ const Trade = ({ trade, setCurrentId }) => {
         </Button>
       </div>
 
-      <div className={classes.overlay2}>
+      <div className={classes.overlay}>
         <Modal open={showChart} onClose={handleChart}>
           {body}
         </Modal>
