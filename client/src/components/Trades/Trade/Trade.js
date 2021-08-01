@@ -18,11 +18,10 @@ import { useDispatch } from "react-redux";
 import { deleteTrade, likeTrade } from "../../../actions/trades";
 
 const Trade = ({ trade, setCurrentId }) => {
-
   function rand() {
     return Math.round(Math.random() * 20) - 10;
   }
-  
+
   function getModalStyle() {
     const top = 50 + rand();
     const left = 50 + rand();
@@ -46,7 +45,7 @@ const Trade = ({ trade, setCurrentId }) => {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-      <h2 id="simple-modal-title">Title</h2>
+      <h2 id="simple-modal-title">{trade.symbol}</h2>
       <p id="simple-modal-description">CHART HERE</p>
     </div>
   );
@@ -102,17 +101,24 @@ const Trade = ({ trade, setCurrentId }) => {
           >
             <MoreHorizIcon fontSize="medium" />
           </Button>
-          <Button style={{ color: "green" }} size="small" onClick={handleChart}>
-            Open chart
-          </Button>
-          <Modal
-            open={showChart}
-            onClose={handleChart}
-            aria-labelledby="Chart"
-            aria-describedby="simple-modal-description"
-          >
-            {body}
-          </Modal>
+          <div>
+            <Button
+              style={{ color: "white" }}
+              size="small"
+              onClick={handleChart}
+              variant="outlined"
+            >
+              Open chart
+            </Button>
+            <Modal
+              open={showChart}
+              onClose={handleChart}
+              aria-labelledby="Chart"
+              aria-describedby="simple-modal-description"
+            >
+              {body}
+            </Modal>
+          </div>
         </div>
       )}
 
