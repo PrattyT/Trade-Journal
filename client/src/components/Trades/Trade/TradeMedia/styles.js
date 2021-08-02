@@ -7,10 +7,16 @@ export default makeStyles((theme) => ({
     backgroundColor: "rgba(0, 0, 50, 0.5)",
     backgroundBlendMode: "darken",
   },
-  mediaClosed: {
+  mediaWin: {
     height: 0,
     paddingTop: "30%",
     backgroundColor: "rgba(0, 50, 0, 0.5)",
+    backgroundBlendMode: "darken",
+  },
+  mediaLoss: {
+    height: 0,
+    paddingTop: "30%",
+    backgroundColor: "rgba(50, 0, 0, 0.5)",
     backgroundBlendMode: "darken",
   },
   border: {

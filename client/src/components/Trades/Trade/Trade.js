@@ -18,6 +18,7 @@ import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import { useDispatch } from "react-redux";
 import { deleteTrade, likeTrade } from "../../../actions/trades";
 import Pnl from "./Pnl/Pnl";
+import TradeMedia from "./TradeMedia/TradeMedia";
 
 const Trade = ({ trade, setCurrentId }) => {
   function rand() {
@@ -86,7 +87,9 @@ const Trade = ({ trade, setCurrentId }) => {
 
   return (
     <Card className={classes.card}>
-      <CardMedia className={classes.media} title={trade.symbol} />
+    
+      <TradeMedia trade={trade} />
+
       <div className={classes.overlay}>
         <Typography variant="h6">{trade.name}</Typography>
         <Typography variant="body2">
@@ -144,10 +147,7 @@ const Trade = ({ trade, setCurrentId }) => {
           Entry Date: {trade.entryDate}
         </Typography>
 
-        {trade.status === "CLOSED" && (
-          <Pnl trade={trade} />
-        )}
-
+        {trade.status === "CLOSED" && <Pnl trade={trade} />}
       </CardContent>
       <CardContent>
         <Typography

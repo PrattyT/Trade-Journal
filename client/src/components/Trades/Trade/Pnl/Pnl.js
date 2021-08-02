@@ -25,7 +25,7 @@ const Pnl = ({ trade }) => {
       </Typography>
 
       <Typography variant="body1" gutterBottom>
-        % Change: {percent()} %
+        Percent Change: {percent()} %
       </Typography>
     </>
   );
