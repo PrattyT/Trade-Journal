@@ -17,6 +17,7 @@ import moment from "moment";
 import ThumbUpAltOutlined from "@material-ui/icons/ThumbUpAltOutlined";
 import { useDispatch } from "react-redux";
 import { deleteTrade, likeTrade } from "../../../actions/trades";
+import Pnl from "./Pnl/Pnl";
 
 const Trade = ({ trade, setCurrentId }) => {
   function rand() {
@@ -108,7 +109,7 @@ const Trade = ({ trade, setCurrentId }) => {
 
       <div className={classes.overlay3}>
         <Button
-          style={{ color: "black" }}
+          style={{ color: "white" }}
           size="small"
           onClick={handleChart}
           variant="outlined"
@@ -144,16 +145,9 @@ const Trade = ({ trade, setCurrentId }) => {
         </Typography>
 
         {trade.status === "CLOSED" && (
-          <>
-            <Typography variant="body1" gutterBottom>
-              Exit Price: {trade.exitPrice}
-            </Typography>
-
-            <Typography variant="body1" gutterBottom>
-              Exit Date: {trade.exitDate === "" ? "missing" : trade.exitDate}
-            </Typography>
-          </>
+          <Pnl trade={trade} />
         )}
+
       </CardContent>
       <CardContent>
         <Typography
